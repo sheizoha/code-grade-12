@@ -1,5 +1,7 @@
 #include<iostream>
 #include<string>
+#include <math.h>
+#include <stdio.h>
 
 
 using namespace std;
@@ -48,16 +50,17 @@ int main ()
 
     // exersize 3 
 
-    string animal;
-    int initialPopulation:
+   string animal;
+    int initialPopulation;
     int currentYear = 2023;
-    int projected;
-    
-    
+    int predictedYear:
+
+
+
 
     cout << "\n";
     cout << "\n";
-    cout << "\n";
+    cout <<"\n";
     cout << "Enter the name of an animal?\n";
     getline(cin, animal);
 
@@ -65,3 +68,21 @@ int main ()
     cin >> initialPopulation;
 
     cout << "Enter the projection year (after 2023)\n";
+    cin >> predictedYear;
+
+
+    int newValue = ( predictedYear - currentYear);
+
+    double math = (pow(2,newValue) * initialPopulation)
+
+    cout >> "\n";
+    cout >> "\n";
+    cout >> "__________________________________";
+    cout >> "|type of animal: " << animal << "|\n";
+    cout >> "|starting amount: " << initialPopulation << "|\n";
+    cout >> "|projected year: " << predictedYear << "|\n";
+    cout >> "|projected population: " << math << "|\n";
+    cout >> "|________________________________|";
+
+
+    }
