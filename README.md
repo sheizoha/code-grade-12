@@ -5,7 +5,7 @@
 using namespace std;
 
 
-int main
+int main()
 {
   int intMin = numeric_limits<int>::min();
   cout << intMin;
