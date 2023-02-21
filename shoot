@@ -1,0 +1,72 @@
+#include<iostream>
+#include<string>
+#include <stdio.h>
+
+
+using namespace std;
+
+int main()
+{
+//exersice one 
+
+
+string word;
+cout << "Enter a Five letter word\n";
+cin >> word;
+
+int b = word.length();
+if (b == 5)
+{
+    cout << "Great job, you have successfully entered a five letter word\n";
+}
+else
+{
+   cout << "OH NO!!! you had ONE job and you can't even do it right\n";
+}
+ 
+ cout << "\n";
+
+ // exersice 2 skip 
+
+ cout << "\n";
+
+//exersice 3 only one number
+int x;
+cout << "Enter a number: ";
+cin >> x;
+
+if (x == 0)
+{
+   cout << "Positive :) \n";
+}
+else if (x < 0 && (x%2) != 0)
+{
+    cout << "Negative, Odd\n";
+}
+else if (x > 0 && (x%2) == 0)
+{
+    cout << "Negative, Even\n";
+}
+else if
+		{
+			printf("Positive Odd\n");
+		} 
+		else if(x > 0 && (x%2) == 0) 
+		{
+			printf("Positive Even\n");
+		} 	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}
