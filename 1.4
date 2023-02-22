@@ -1,0 +1,82 @@
+#include<iostream>
+#include<string>
+#include <bits/stdc++.h>
+
+using namespace std;
+
+
+bool sentencePalindrome(string str)
+{
+    int l = 0, h = str.length() - 1;
+  
+    // Lowercase string
+    for (int i = 0; i <= h; i++)
+        str[i] = tolower(str[i]);
+  
+    // Compares character until they are equal
+    while (l <= h) {
+  
+        // If there is another symbol in left
+        // of sentence
+        if (!(str[l] >= 'a' && str[l] <= 'z'))
+            l++;
+  
+        // If there is another symbol in right
+        // of sentence
+        else if (!(str[h] >= 'a' && str[h] <= 'z'))
+            h--;
+  
+        // If characters are equal
+        else if (str[l] == str[h])
+            l++, h--;
+  
+        // If characters are not equal then
+        // sentence is not palindrome
+        else
+            return false;
+    }
+  
+    // Returns true if sentence is palindrome
+    return true;
+}
+  
+// Driver program to test sentencePalindrome()
+int main()
+{
+    
+    return 0;
+}
+
+int main ()
+{
+
+
+// exercise 1 
+int i;
+
+cout << "\n";
+
+for (i = 1000; i >= 99; i-=1)
+{	
+    cout << i << endl;
+}
+
+//exercis 2
+
+string str;
+
+ cout << "Enter a palindrome.\n";
+ getline (str, cin)
+  
+    if (sentencePalindrome(str))
+    {
+        cout << "Sentence is palindrome.";
+    }
+    else
+    {
+        cout << "way to go smart one!!🙄This sentence is not palindrome.";
+    }
+  
+
+
+}
