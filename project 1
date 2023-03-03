@@ -1,0 +1,62 @@
+#include<iostream>
+#include<string>
+#include <vector>
+#include <algorithm>
+#include <stdio.h> 
+
+
+using namespace std;
+
+int main()
+{
+ cout << "\n";
+ cout << "\n";
+
+ cout << "Unit Project: 1\n";
+
+ cout << "\n";
+ cout << "\n";
+ cout << "_________________________________\n";
+ cout << "|🐸-----------TO-DO----------🐸|\n";
+ cout << "|_______________________________|\n";
+ 
+ int entry;
+ cout <<"Enter the amount of Entries you wish to make: ";
+ cin >> entry;
+  
+ cout << "\n";
+ cout << "\n";
+ 
+ 
+ string list;
+ string str;
+ 
+
+	
+
+	while(true)
+	{
+		cout<< "Add entries ";
+		getline(cin, str);
+		if(str==entry)
+        {
+          break;
+        }
+	}
+
+	
+	cout<<"List elements are";
+	string ext = list.begin(); ext != list.end(); ext++ ;
+
+       cout << ext;
+
+    
+		
+ cout << "\n";
+
+
+
+
+
+
+}
