@@ -60,3 +60,77 @@ int main()
 
 
 }
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+#include<iostream>
+#include<string>
+ 
+
+
+using namespace std;
+
+vector<string> alphabaticallySort(vector<string> a)
+{
+	int n=a.size();
+	
+	sort(a.begin(),a.end(),mycomp);
+	return a;
+}
+
+int main()
+{
+ cout << "\n";
+ cout << "\n";
+
+ cout << "Unit Project: 1\n";
+
+ cout << "\n";
+ cout << "\n";
+ cout << "_________________________________\n";
+ cout << "|-----------TO-DO-------------  |\n";
+ cout << "|_______________________________|\n";
+ 
+ int entry;
+ cout <<"Enter the amount of Entries you wish to make: ";
+ getline (cin, entry);
+
+string task;
+ string more;
+ cout << "Enter your next step\n";
+ cout << "Add\n";
+ cout << "Read\n";
+ cout << "Sort Alphabtically\n" 
+ cout << "Complete reset the list\n";
+ cout << "Type Here -> : ";
+ cin >> more;
+
+
+ cout << "\n";
+ cout << "\n";
+
+   
+ 
+ for (more == "add"; more == "Add"; more++ )
+ {   
+   cout << "Enter new task(type stop to stop): ";
+   getline (cin, task);
+   if (task == "stop")
+   {
+	break;
+   }
+    cout << entry << task;
+ }
+ 
+ if (more == "read")
+ {
+	cout << entry;
+ }
+ else if (more == "sort aphabetically")
+ {
+	cout <<
+ }
+ 
+}
