@@ -1,0 +1,59 @@
+#include <iostream>
+#include <fstream>
+#include<string>
+#include <cstdlib>
+
+ 
+
+
+using namespace std;
+
+
+int main()
+{
+ cout << "\n";
+ cout << "\n";
+
+ cout << "Unit Project: 1\n";
+
+ cout << "\n";
+ cout << "\n";
+ cout << "_________________________________\n";
+ cout << "|-----------TO-DO-------------  |\n";
+ cout << "|_______________________________|\n";
+ 
+ int entry;
+ cout << "Entry amount?\n";
+ cin >> entry;
+
+string task;
+ for (int i = 1; i <= entry; ++i)
+ {
+   cout << "Enter your task, Enter 'done' ";
+   getline(cin, task);
+   cout << task << endl;
+ }
+
+
+string more;
+ cout << "Enter your next step\n";
+ cout << "Add\n";
+ cout << "Read\n";
+ cout << "Sort Alphabtically\n"; 
+ cout << "Complete reset the list\n";
+ cout << "Type Here -> : ";
+ cin >> more;
+
+
+ cout << "\n";
+ cout << "\n";
+           
+ 
+
+// challenge 1 
+ time_t now = time(0);
+char*date_time = ctime(&now);
+cout << "the current date and time: \n";
+cout << date_time;
+ 
+}
