@@ -1,0 +1,148 @@
+#include <iostream>
+#include <string>
+#include <cstdlib>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+struct task
+{
+  string name;
+  int date; // part of the challenge to show priority
+
+}
+;
+// the remove and sort were not functional in int main()
+//so they were turned into void functions better
+
+void removeTask(vector<task>& Atasks) {
+    if (Atasks.empty()) {
+        cout << "No entries have been made yet!" << endl;
+    } 
+    else {
+        int removeTask; //chose to do placement instead of name of task cuz string or vector wasnt working for removal
+        cout << "Enter placement number of task you want to remove: ";
+        cin >> removeTask;
+        
+      Atasks.erase(Atasks.begin() + removeTask);
+        
+      
+      cout << "Task was successfully removed!" << endl;
+    
+
+    }
+  }
+void sortTask(vector<task>& Atasks){
+ sort(Atasks.begin(),Atasks.end(),[](const task& t1, const task& t2){
+   return t1.name < t2.name; // struct for t1 and t2
+   });
+ 
+}
+
+
+
+int main() 
+{
+ vector<task> tasks;//intilizing it to hold tasks
+
+ bool done = false;
+
+  cout << "-------------todo-list-------------\n";
+  
+ while (!done) // while not done
+   {
+     //options for todo list
+     cout << "ToDo list options: \n";
+     cout << "1. Add new task\n";
+     cout << "2. read all tasks\n";
+     cout << "3. Alphabetically sort\n";
+     cout << "4. Complete reset\n";
+     cout << "5. Remove task\n";
+     cout << "6. Exit\n";
+
+     cout << "\n";
+     cout << "\n";
+
+     //choosing one of the options
+     int choice;
+     cout << "Enter your choice number:\n";
+     cin >> choice;
+
+     switch (choice){
+    case 1:{
+      //make New Entry
+       int entryNum;
+       task newTask;
+      
+      cout << "how many tasks you want to add\n";
+       cin >> entryNum;
+        
+      for(int i = 0; i < entryNum; i++){
+        
+        cout << "\nEnter task name: ";
+        cin >> newTask.name;
+        
+        cout << "\n";
+        
+        cout << "Enter due date(only day): ";
+        cin >> newTask.date;
+        
+        tasks.push_back(newTask); // adds new vector to the end, after last current element 
+        }
+
+      cout << "New Task added!" << endl;
+      break;
+       }
+    case 2:{
+      //read the to-do list
+       if (tasks.empty()){
+         cout << "Nothing has been added to to-do list\n";
+       }
+       else {
+         for (int k = 0; k < tasks.size(); k++){
+           cout << tasks[k].name << " --> due: " << tasks[k].date << endl;
+         }
+         break;
+         }
+       } 
+    case 3:{
+        //sorting
+          sortTask(tasks);
+          break;
+       }
+    case 4:{  
+      //complete reset
+      tasks.clear();
+    } 
+   case 5:{
+      //remove tasks
+      removeTask(tasks);
+       break;
+       }
+    case 6:{
+      //exit the function
+       done = true;
+       break;
+       
+       }
+       default:{
+         //if you choose invalid option
+         cout << "get it right dude, number input was Invalid (-_-) \n";
+       }
+   }
+
+     
+   }
+ 
+// current time challenge and the priority challenges were done
+// the due date was added therefore showing priority 
+
+time_t now = time(0);
+char*date_time = ctime(&now);
+cout << "the current date and time of completion is: \n";
+cout << date_time;
+
+// end of code hope you liked it!
+  
+}
