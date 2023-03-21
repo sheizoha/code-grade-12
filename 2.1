@@ -1,0 +1,82 @@
+#include<iostream>
+#include<string>
+#include<vector>
+
+using namespace std;
+
+
+
+int sumVector(vector<int> numbers)
+{
+    int sum = 0;
+
+    for (int i = 0; i < numbers.size(); i++)
+    {
+        sum += numbers[i];
+    }
+return sum;
+}
+int averageVector(vector<int> numbers)
+{
+    int final = 0;
+    int avrg, size;
+
+
+    for (int j = 0; j < numbers.size(); j++)
+    {
+        final += numbers[j];
+
+        size = j + 1;
+
+        
+    }
+
+return avrg = final/size;
+}
+int GCD(int a, int b)
+{
+ 
+ int result = min(a, b);
+
+ while (result > 0){
+
+    if (a % result == 0 && b % result)
+    {
+        break;
+    }
+    return ;
+ }
+ return result;
+
+}
+
+int main ()
+{
+//2.1 exersize 1
+
+cout << "\n";
+cout << "\n";
+
+vector<int> marks = {3,6,5,3};
+cout << sumVector(marks);
+
+cout << "\n";
+cout << "\n";
+
+//2.1 exersize 2
+
+vector <int> number {5,5,2,3,4,5};
+cout << averageVector(number);
+
+cout << "\n";
+cout << "\n";
+
+//2.1 exersize 3 
+int a = 24;
+int b = 44;
+
+cout << "the GDC of " << a << " and " << b << " is \n";
+cout << GCD(a,b);
+
+
+}
