@@ -1,0 +1,36 @@
+#include<iostream>
+#include<string>
+#include<vector>
+
+using namespace std;
+
+
+string sum(vector<string> numbers)
+{
+    string sum = 0;
+
+    for (string i = 0; i < numbers.size(); i++)
+    {
+        sum += numbers[i];
+    }
+return sum;
+}
+
+
+
+
+int main()
+{
+
+// 2.2 exercise 1 
+
+string newNum;
+string numNew
+
+cout << "Enter number: ";
+getline(cin, newNum);
+cout << "\n";
+cout << "Enter New number: ";
+getline(cin, numNew);
+cout << "\n";
+cout << sum(newNum, numNew);
