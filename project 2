@@ -1,0 +1,70 @@
+include<iostream>
+include<vector>
+
+
+using namespace std;
+
+
+int factorial(int n) 
+{
+    if (n == 1) 
+    {
+        return 1;
+    } 
+    else 
+    {
+        return n * factorial(n-1);
+    }
+    return 0;
+}
+int combination(int n, int r)
+{
+   if (n == 1)
+   {
+     return 1;
+   }
+   else 
+   {
+
+      return n! / r!(n-r)!;
+
+
+   }
+
+}
+int GCD(int a, int b)
+{
+ 
+ int result = min(a, b);
+
+ while (result > 0){
+
+    if (a % result == 0 && b % result)
+    {
+        break;
+    }
+    return 0;
+ }
+ return result;
+
+}
+
+
+
+
+int main () 
+{
+
+
+
+
+    
+}
+
+
+
+
+
+
+
+}
