@@ -48,6 +48,17 @@ int GCD(int a, int b)
  return result;
 
 }
+int multiplicationTable(int n, int range)
+{
+
+   for (int i = 1; i <= range; ++i) 
+    {
+        cout << n << " * " << i << " = " << n * i ;
+    }
+    
+    return 0;
+    
+}
 
 
 
