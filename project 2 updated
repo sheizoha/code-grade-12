@@ -1,7 +1,8 @@
 #include<iostream>
 #include<vector>
-#include"Header.hpp"
-#include <fstream> //to play videos 
+#include <iomanip>
+
+
 
 
 using namespace std;
@@ -28,12 +29,16 @@ int combination(int n, int r)
    else 
    {
 
-      return n! / r!(n-r)!;
+      return (n! / r!(n-r)!) ;
 
 
    }
-
 }
+int combination_two(int n, int r) 
+{
+    return factorial(n) / (factorial(r) * factorial(n - r));
+}
+
 int GCD(int a, int b)
 {
  
@@ -48,8 +53,25 @@ int GCD(int a, int b)
     return 0;
  }
  return result;
-
 }
+
+int lcm(int a, int b) 
+{
+    int max = (a > b) ? a : b;
+    do {
+        if (max % a == 0 && max % b == 0) 
+        {
+            return max;
+        } else 
+        {
+            max++;
+        }
+    } 
+  while (true);
+  
+}
+
+
 int multiplicationTable(int n, int range)
 {
 
@@ -62,22 +84,32 @@ int multiplicationTable(int n, int range)
     
 }
 
-
-
-
 int main () 
 {
+  int F_num;
+  cout << "enter factorial number\n";
+  cin >> F_num;
+  cout << "\n =" << factorial(F_num);
 
 
+  int Com_num;
+  int com_num;
+  cout << "\n enter your 2 combination numbers\n";
+  cin >> Com_num;
+  cout << "\n";
+  cin >> com_num;
+  cout << "\n =" << combination(Com_num, com_num);
 
+  int gdc_one;
+  int gdc_two;
+  cout << "\n enter the 2 numbers you want the GDC and LCM of: \n";
+  cin >> gdc_one;
+  cout <<"\n";
+  cin >> gdc_two;
+  cout << "\n =" << GCD(gdc_one, gdc_two);
+  cout << "\n =" << lcm(2,4);
 
-    
-}
+  int range = 12;
+  int number = 5;
 
-
-
-
-
-
-
-}
+  cout << multiplicationTable(number,range);
