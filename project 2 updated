@@ -7,10 +7,10 @@
 
 using namespace std;
 
-
+//factorial
 int factorial(int n) 
 {
-    if (n == 1) 
+    if (n <= 1) 
     {
         return 1;
     } 
@@ -20,41 +20,37 @@ int factorial(int n)
     }
     return 0;
 }
-int combination(int n, int r)
+
+//combination
+int combination(int a, int r) 
 {
-   if (n == 1)
-   {
-     return 1;
-   }
-   else 
-   {
-
-      return (n! / r!(n-r)!) ;
-
-
-   }
-}
-int combination_two(int n, int r) 
-{
-    return factorial(n) / (factorial(r) * factorial(n - r));
-}
-
-int GCD(int a, int b)
-{
- 
- int result = min(a, b);
-
- while (result > 0){
-
-    if (a % result == 0 && b % result)
+    if (r > a)
     {
-        break;
+        return -1;
     }
-    return 0;
- }
- return result;
+
+    return factorial(a) / (factorial(r) * factorial(a - r));
 }
 
+//greatest common multiple
+int gcd(int a, int b)
+{
+    // Everything divides 0
+    if (a == 0)
+       return b;
+    if (b == 0)
+       return a;
+  
+    // base case
+    if (a == b)
+        return a;
+  
+    // a is greater
+    if (a > b)
+        return gcd(a-b, b);
+    return gcd(a, b-a);
+}
+// lowest common multiple
 int lcm(int a, int b) 
 {
     int max = (a > b) ? a : b;
@@ -71,13 +67,13 @@ int lcm(int a, int b)
   
 }
 
-
+//multiplication table
 int multiplicationTable(int n, int range)
 {
 
    for (int i = 1; i <= range; ++i) 
     {
-        cout << n << " * " << i << " = " << n * i ;
+        cout << n << " * " << i << " = " << n * i  << endl;
     }
     
     return 0;
@@ -106,10 +102,23 @@ int main ()
   cin >> gdc_one;
   cout <<"\n";
   cin >> gdc_two;
-  cout << "\n =" << GCD(gdc_one, gdc_two);
-  cout << "\n =" << lcm(2,4);
+  cout << "\n GCD =" << gcd(gdc_one, gdc_two);
+  cout << "\n LCM =" << lcm(gdc_one, gdc_two);
 
-  int range = 12;
-  int number = 5;
+
+  int range;
+  int number;
+  cout << "\n";
+  cout << "\n";
+  cout << "Multiplication table\n";
+  cout << "____________________\n";
+  cout << "\n";
+  cout << "Enter Range: ";
+  cin >> range;
+  cout << "\nEnter number being multiplied: ";
+  cin >> number;
+  cout << "\n";
+
 
   cout << multiplicationTable(number,range);
+}
