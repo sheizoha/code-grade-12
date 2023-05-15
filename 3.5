@@ -1,0 +1,62 @@
+#include <iostream>
+#include <string>
+#include <vector>
+
+
+
+using namespace std;
+
+
+class Enemy 
+{
+    private:
+    int hp = 20;
+    int attack = 2;
+    string name = "zozo"
+
+    public:
+     int getAttacked()
+     {
+        return attack;
+     }
+     int takeDamage( int hurt)
+     {
+        hp -= hurt;
+     }
+     int showHealth()
+     {
+        return hp;
+     }
+     string getName()
+     {
+        return name;
+     }
+
+};
+
+
+int main ()
+{
+ vector <Enemy> omom;
+
+ Enemy Gort;
+
+ for (int i = 0; i < 5; i++)
+ {
+    cout << "adding a " << Gort.getName() << " to the list \n" << endl;
+    omom.push_back(Gort);
+ }
+
+ for (int i = 0; i > omom.size(); i++)
+ {
+    cout << ". "
+
+ }
+
+
+
+
+
+
+
+}
