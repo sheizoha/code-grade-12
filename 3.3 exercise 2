@@ -1,0 +1,90 @@
+#include <iostream>
+
+using namespace std;
+
+class Enemy {
+private:
+    int hp;
+    int attackDamage;
+
+public:
+    // Constructor
+    Enemy(int startingHP, int damage) {
+        hp = startingHP;
+        attackDamage = damage;
+    }
+
+    // Getter methods
+    int getHP() const {
+        return hp;
+    }
+
+    int getAttackDamage() const {
+        return attackDamage;
+    }
+
+    // Method to update HP
+    void updateHP(int damage) {
+        hp -= damage;
+        if (hp < 0) {
+            hp = 0;
+        }
+    }
+};
+
+class Player {
+private:
+    int hp;
+    int attackDamage;
+
+public:
+    // Constructor
+    Player(int startingHP, int damage) {
+        hp = startingHP;
+        attackDamage = damage;
+    }
+
+    // Getter methods
+    int getHP() const {
+        return hp;
+    }
+
+    int getAttackDamage() const {
+        return attackDamage;
+    }
+
+    // Method to update HP
+    void updateHP(int damage) {
+        hp -= damage;
+        if (hp < 0) {
+            hp = 0;
+        }
+    }
+};
+
+int main() {
+    Player player(100, 20);
+    Enemy enemy(80, 15);
+
+    while (player.getHP() > 0 && enemy.getHP() > 0) {
+        cout << "Player attacks enemy!" << endl;
+        enemy.updateHP(player.getAttackDamage());
+        cout << "Enemy HP: " << enemy.getHP() << endl;
+
+        if (enemy.getHP() <= 0) {
+            cout << "Enemy defeated! Player wins!" << endl;
+            break;
+        }
+
+        cout << "Enemy attacks player!" << endl;
+        player.updateHP(enemy.getAttackDamage());
+        cout << "Player HP: " << player.getHP() << endl;
+
+        if (player.getHP() <= 0) {
+            cout << "Player defeated! Enemy wins!" << endl;
+            break;
+        }
+    }
+
+    return 0;
+}
