@@ -1,0 +1,42 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+class Student {
+private:
+    string name;
+    int grade;
+    int studentNumber;
+
+public:
+    // Constructor
+    Student(const string& studentName, int studentGrade, int studentNumber) {
+        name = studentName;
+        grade = studentGrade;
+        this->studentNumber = studentNumber;
+    }
+
+    // Getter methods
+    string getName() const {
+        return name;
+    }
+
+    int getGrade() const {
+        return grade;
+    }
+
+    int getStudentNumber() const {
+        return studentNumber;
+    }
+};
+
+int main() {
+    Student student("John Doe", 12, 123456);
+
+    cout << "Name: " << student.getName() << endl;
+    cout << "Grade: " << student.getGrade() << endl;
+    cout << "Student Number: " << student.getStudentNumber() << endl;
+
+    return 0;
+}
