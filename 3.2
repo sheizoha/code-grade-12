@@ -1,0 +1,86 @@
+#include <iostream>
+
+using namespace std;
+
+class Enemy {
+private:
+    int hp;
+    int attackDamage;
+
+public:
+    Enemy(int startingHP, int damage) : hp(startingHP), attackDamage(damage) {}
+
+    int getHP() const {
+        return hp;
+    }
+
+    void updateHP(int damage) {
+        hp -= damage;
+        if (hp < 0) {
+            hp = 0;
+        }
+    }
+
+    int getAttackDamage() const {
+        return attackDamage;
+    }
+};
+
+class Player {
+private:
+    int hp;
+    int attackDamage;
+
+public:
+    Player(int startingHP, int damage) : hp(startingHP), attackDamage(damage) {}
+
+    int getHP() const {
+        return hp;
+    }
+
+    void updateHP(int damage) {
+        hp -= damage;
+        if (hp < 0) {
+            hp = 0;
+        }
+    }
+
+    int getAttackDamage() const {
+        return attackDamage;
+    }
+};
+
+void showHealthBar(int health) {
+    cout << "Health: ";
+    for (int i = 0; i < health; ++i) {
+        cout << "▮";
+    }
+    cout << endl;
+}
+
+int main() {
+    Player player(100, 20);
+    Enemy enemy(80, 15);
+
+    while (player.getHP() > 0 && enemy.getHP() > 0) {
+        cout << "Player attacks enemy!" << endl;
+        enemy.updateHP(player.getAttackDamage());
+        showHealthBar(enemy.getHP());
+
+        if (enemy.getHP() <= 0) {
+            cout << "Enemy defeated! Player wins!" << endl;
+            break;
+        }
+
+        cout << "Enemy attacks player!" << endl;
+        player.updateHP(enemy.getAttackDamage());
+        showHealthBar(player.getHP());
+
+        if (player.getHP() <= 0) {
+            cout << "Player defeated! Enemy wins!" << endl;
+            break;
+        }
+    }
+
+    return 0;
+}
