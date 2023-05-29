@@ -1,0 +1,111 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+class Entity {
+protected:
+    string name;
+    int hp;
+    int attack;
+    int defense;
+
+public:
+    Entity(const string& entityName, int entityHP, int entityAttack, int entityDefense)
+        : name(entityName), hp(entityHP), attack(entityAttack), defense(entityDefense) {}
+
+    void takeDamage(int damage) {
+        hp -= damage;
+        if (hp < 0) {
+            hp = 0;
+        }
+    }
+
+    bool isDefeated() const {
+        return hp <= 0;
+    }
+
+    virtual void attackEnemy(Entity& enemy) = 0;
+};
+
+class Player : public Entity {
+public:
+    Player(const string& playerName, int playerHP, int playerAttack, int playerDefense)
+        : Entity(playerName, playerHP, playerAttack, playerDefense) {}
+
+    void attackEnemy(Entity& enemy) override {
+        int damage = attack - enemy.defense;
+        if (damage > 0) {
+            enemy.takeDamage(damage);
+        }
+    }
+};
+
+class Enemy : public Entity {
+public:
+    Enemy(const string& enemyName, int enemyHP, int enemyAttack, int enemyDefense)
+        : Entity(enemyName, enemyHP, enemyAttack, enemyDefense) {}
+
+    void attackPlayer(Entity& player) {
+        int damage = attack - player.defense;
+        if (damage > 0) {
+            player.takeDamage(damage);
+        }
+    }
+};
+
+int main() {
+    // Player selection
+    Player player1("Player 1", 100, 20, 10);
+    Player player2("Player 2", 80, 25, 5);
+    Player player3("Player 3", 120, 15, 15);
+
+    Enemy enemy("Enemy", 150, 30, 10);
+
+    Entity* currentPlayer = nullptr;
+    int playerChoice;
+
+    cout << "Player Selection:\n";
+    cout << "1. " << player1.getName() << "\n";
+    cout << "2. " << player2.getName() << "\n";
+    cout << "3. " << player3.getName() << "\n";
+    cout << "Select a player (1-3): ";
+    cin >> playerChoice;
+
+    // Set the current player based on user choice
+    switch (playerChoice) {
+        case 1:
+            currentPlayer = &player1;
+            break;
+        case 2:
+            currentPlayer = &player2;
+            break;
+        case 3:
+            currentPlayer = &player3;
+            break;
+        default:
+            cout << "Invalid choice. Defaulting to Player 1.\n";
+            currentPlayer = &player1;
+            break;
+    }
+
+    cout << "Battle Start!\n";
+
+    // Turn-based combat until either player or enemy is defeated
+    while (!currentPlayer->isDefeated() && !enemy.isDefeated()) {
+        currentPlayer->attackEnemy(enemy);
+        if (enemy.isDefeated()) {
+            break;
+        }
+        enemy.attackPlayer(*currentPlayer);
+    }
+
+    // Determine the winner
+    if (currentPlayer->isDefeated()) {
+        cout << "Player has been defeated. Enemy wins!\n";
+    } else {
+        cout << "Enemy has been defeated. Player wins!\n";
+    }
+
+    return 0;
+}
