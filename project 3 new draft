@@ -235,3 +235,120 @@ int main() {
 
     return 0;
 }
+-=---------------------------------
+
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+class Entity {
+protected:
+    string name;
+    int hp;
+    int attack;
+    int defense;
+
+public:
+    Entity(const string& name, int hp, int attack, int defense)
+        : name(name), hp(hp), attack(attack), defense(defense) {}
+
+    string getName() const { return name; }
+    int getHP() const { return hp; }
+    void setHP(int newHP) { hp = newHP; }
+    int getAttack() const { return attack; }
+    int getDefense() const { return defense; }
+
+    void attackEntity(Entity& other, int damage) 
+    {
+        other.hp = max(0, other.hp - damage);
+        cout << name << " attacked " << other.name << " for " << damage << " damage!" << endl;
+    }
+
+    bool isDefeated() const
+    {
+        return hp <= 0;
+    }
+};
+
+class Player : public Entity {
+public:
+    Player(const string& name, int hp, int attack, int defense)
+        : Entity(name, hp, attack, defense) {}
+
+    int chooseDamage() {
+        int damage;
+        cout << name << " enter the amount of damage you want to do: ";
+        cin >> damage;
+        return damage;
+    }
+};
+
+class Enemy : public Entity {
+public:
+    Enemy(const string& name, int hp, int attack, int defense)
+        : Entity(name, hp, attack, defense) {}
+
+    int chooseDamageEnemy() {
+        // Enemy damage
+         int damage;
+        cout << "Goblin King enter the amount of damage you want to do: ";
+        cin >> damage;
+        return damage;
+       
+    }
+};
+
+int main() {
+    Player players[3] = {
+        Player("Dragon Slayer", 100, 20, 10),
+        Player("Warrior Fairy", 120, 18, 12),
+        Player("shadow Assasin", 80, 25, 8)
+    };
+
+    cout << "Choose your player:" << endl;
+    cout << "1. " << players[0].getName() << endl;
+    cout << "2. " << players[1].getName() << endl;
+    cout << "3. " << players[2].getName() << endl;
+    int choice;
+    cout << "Enter your choice (1-3): ";
+    cin >> choice;
+
+    if (choice < 1 || choice > 3) {
+        cout << "Invalid choice! Exiting the game." << endl;
+        return 0;
+    }
+
+    Player& player = players[choice - 1];
+    Enemy enemy("Goblin King", 150, 15, 5);
+
+    cout << "----- Battle Start -----" << endl;
+
+  
+
+    while (true) {
+        int playerDamage = player.chooseDamage();
+        int enemyDamage = enemy.chooseDamageEnemy();
+       
+       
+        player.attackEntity(enemy, enemyDamage);
+        if (player.isDefeated()) {
+            cout << "Enemy " << enemy.getName() << " wins!" << endl;
+            break;
+        }
+
+        enemy.attackEntity(player, playerDamage);
+
+        if (enemy.isDefeated()) {
+            cout << "Player " << player.getName() << " wins!" << endl;
+            break;
+        }
+
+        cout << endl;
+    }
+
+    cout << "----- Battle End -----" << endl;
+
+    return 0;
+}
+
