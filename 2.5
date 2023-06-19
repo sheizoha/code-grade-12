@@ -1,0 +1,84 @@
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+// Function to generate the 2D vector of odd numbers
+vector<vector<int>> generateOddNumbersGrid() {
+    vector<vector<int>> grid;
+
+    int number = 1;
+    for (int i = 0; i < 10; ++i) {
+        vector<int> row;
+        for (int j = 0; j < 5; ++j) {
+            row.push_back(number);
+            number += 2;
+        }
+        grid.push_back(row);
+    }
+
+    return grid;
+}
+
+// Function to print the 2D vector
+void printGrid(const vector<vector<int>>& grid) {
+    for (const auto& row : grid) {
+        for (int num : row) {
+            cout << num << " ";
+        }
+        cout << endl;
+    }
+}
+
+int main() {
+    vector<vector<int>> oddNumbersGrid = generateOddNumbersGrid();
+    printGrid(oddNumbersGrid);
+
+    return 0;
+}
+---------------------------------------------------------------------------
+//ex 2
+#include <iostream>
+#include <vector>
+#include <string>
+
+using namespace std;
+
+// Function to generate the battleship board locations
+
+vector<vector<string>> generateBattleshipBoard() {
+    vector<vector<string>> board;
+
+    char column = 'A';
+    for (int i = 1; i <= 10; ++i) {
+        vector<string> row;
+        for (int j = 1; j <= 10; ++j) {
+            string location = column + to_string(i);
+            row.push_back(location);
+            ++column;
+        }
+        board.push_back(row);
+        column = 'A';
+    }
+
+    return board;
+}
+
+// Function to print the battleship board
+
+void printBattleshipBoard(const vector<vector<string>>& board) {
+    for (const auto& row : board) {
+        for (const string& location : row) {
+            cout << location << " ";
+        }
+        cout << endl;
+    }
+}
+
+int main() {
+    vector<vector<string>> battleshipBoard = generateBattleshipBoard();
+    printBattleshipBoard(battleshipBoard);
+
+    return 0;
+}
+
