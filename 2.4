@@ -1,0 +1,53 @@
+//header file 
+//ex 1
+#include <vector>
+
+// Define a vector of integers as test data
+vector<int> testData = {1, 2, 3, 4, 5};
+
+-------------------------------------------------------------------------------------------------------------------------------------------
+
+#include <iostream>
+#include "TestData.hpp"
+
+using namespace std;
+
+int main() {
+     for (int num : testData) {
+        cout << num << " ";
+    }
+   cout << endl;
+
+}
+
+// ex 2
+//header
+#include <vector>
+
+
+int calculateSum(const vector<int>& numbers) {
+    int sum = 0;
+    for (int num : numbers) {
+        sum += num;
+    }
+    return sum;
+}
+
+-----------------------------------------------------------------------------------------
+#include "TestData.hpp"
+#include "SumCalculator.h"
+#include <iostream>
+
+int main() {
+    // Access the test data vector
+    for (int num : testData) {
+        cout << num << " ";
+    }
+   cout << std::endl;
+
+    // Calculate and print the sum of the test data vector
+    int sum = calculateSum(testData);
+   cout << "Sum: " << sum << endl;
+
+    return 0;
+}
