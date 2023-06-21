@@ -1,0 +1,101 @@
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+int binarySearch(const vector<int>& data, int target) {
+    int low = 0;
+    int high = data.size() - 1;
+
+    while (low <= high) {
+        int mid = low + (high - low) / 2;
+
+        if (data[mid] == target) {
+            return mid; // Found the target at index mid
+        } else if (data[mid] < target) {
+            low = mid + 1; // Target is in the right half
+        } else {
+            high = mid - 1; // Target is in the left half
+        }
+    }
+
+    return -1; // Target not found
+}
+
+int main() {
+    vector<int> data = {34, 40, 45, 48, 53, 63, 87, 87, 88, 89};
+    int target = 45;
+
+    int index = binarySearch(data, target);
+
+    if (index != -1) {
+        cout << "The number " << target << " was found at index " << index << "." << endl;
+    } else {
+        cout << "The number " << target << " was not found in the data." << endl;
+    }
+
+}
+**************************************************************************************************************************
+**************************************************************************************************************************
+//ex 2
+
+#include <iostream>
+#include <fstream>
+#include <vector>
+using namespace std;
+
+bool binarySearch(const vector<int>& numbers, int target, int& lineNum) {
+    int left = 0;
+    int right = numbers.size() - 1;
+
+    while (left <= right) {
+        int mid = left + (right - left) / 2;
+
+        if (numbers[mid] == target) {
+            lineNum = mid + 1;
+            return true;
+        }
+        else if (numbers[mid] < target) {
+            left = mid + 1;
+        }
+        else {
+            right = mid - 1;
+        }
+    }
+
+    return false;
+}
+
+bool findNumberInFile(const string& filename, int number) 
+{
+    ifstream file(filename);
+    int value;
+    vector<int> numbers;
+
+    while (file >> value) {
+        numbers.push_back(value);
+    }
+
+    file.close();
+
+    int lineNum;
+    if (binarySearch(numbers, number, lineNum)) {
+       cout << "The number " << number << " exists in the file at line " << lineNum << "." << endl;
+        return true;
+    }
+    else 
+    {
+        cout << "The number " << number << " does not exist in the file." << endl;
+        return false;
+    }
+}
+
+int main() 
+{
+   string filename = "numbers.txt";
+    int targetNumber = 3738;
+
+    findNumberInFile(filename, targetNumber);
+
+}
+
