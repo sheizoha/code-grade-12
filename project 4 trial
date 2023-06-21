@@ -1,0 +1,119 @@
+#include "raylib.h"
+
+const int screenWidth = 800;
+const int screenHeight = 450;
+const int gravity = 2;
+
+class Entity {
+public:
+    Vector2 position;
+    Vector2 velocity;
+};
+
+class Player : public Entity {
+public:
+    bool isJumping;
+    int health;
+    
+    Player(float x, float y) {
+        position.x = x;
+        position.y = y;
+        velocity.x = 0;
+        velocity.y = 0;
+        isJumping = false;
+        health = 100;
+    }
+    
+    void Move(float deltaTime) {
+        // Horizontal movement
+        if (IsKeyDown(KEY_LEFT)) {
+            velocity.x = -5;
+        } else if (IsKeyDown(KEY_RIGHT)) {
+            velocity.x = 5;
+        } else {
+            velocity.x = 0;
+        }
+        
+        // Jumping
+        if (IsKeyPressed(KEY_SPACE) && !isJumping) {
+            velocity.y = -20;
+            isJumping = true;
+        }
+        
+        // Apply gravity
+        velocity.y += gravity;
+        
+        // Update position
+        position.x += velocity.x * deltaTime;
+        position.y += velocity.y * deltaTime;
+        
+        // Collision detection (prevent players from standing on each other)
+        if (position.y >= screenHeight - 50) {
+            position.y = screenHeight - 50;
+            velocity.y = 0;
+            isJumping = false;
+        }
+    }
+    
+    void Draw() {
+        DrawRectangle(position.x, position.y, 50, 50, RED);
+        DrawRectangle(position.x, position.y - 10, health / 2, 5, GREEN);
+    }
+};
+
+class Enemy : public Entity {
+public:
+    Enemy(float x, float y) {
+        position.x = x;
+        position.y = y;
+        velocity.x = 2;
+        velocity.y = 0;
+    }
+    
+    void Move() {
+        // Horizontal movement
+        position.x += velocity.x;
+        
+        // Reverse direction when reaching screen edges
+        if (position.x <= 0 || position.x >= screenWidth - 50) {
+            velocity.x *= -1;
+        }
+    }
+    
+    void Draw() {
+        DrawRectangle(position.x, position.y, 50, 50, BLUE);
+    }
+};
+
+int main() {
+    InitWindow(screenWidth, screenHeight, "Game");
+    
+    Player player(100, screenHeight - 50);
+    Enemy enemy(screenWidth - 150, screenHeight - 50);
+    
+    SetTargetFPS(60);
+    
+    while (!WindowShouldClose()) {
+        float deltaTime = GetFrameTime();
+        
+        player.Move(deltaTime);
+        enemy.Move();
+        
+        if (CheckCollisionRecs({ player.position.x, player.position.y, 50, 50 },
+                               { enemy.position.x, enemy.position.y, 50, 50 })) {
+            player.health -= 10; // Deduct health if player and enemy collide
+        }
+        
+        BeginDrawing();
+        ClearBackground(WHITE);
+        
+        player.Draw();
+        enemy.Draw();
+        
+        EndDrawing();
+    }
+    
+    CloseWindow();
+    
+    return 0;
+}
