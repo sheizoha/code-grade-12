@@ -1,0 +1,138 @@
+#include <iostream>
+#include <fstream>
+#include <vector>
+
+using namespace std;
+
+bool linearSearch(const vector<int>& numbers, int target) {
+    for (int i = 0; i < numbers.size(); ++i) {
+        if (numbers[i] == target) {
+            return true;
+        }
+    }
+    return false;
+}
+
+int main() {
+    ifstream inputFile("numbers.txt");
+    if (!inputFile) 
+    {
+        cout << "Error opening file." << endl;
+        return 0;
+    }
+
+    vector<int> numbers;
+    int num;
+    while (inputFile >> num) 
+    {
+        numbers.push_back(num);
+    }
+    inputFile.close();
+
+    int target = 343;
+    if (linearSearch(numbers, target))
+    {
+        cout << "Number " << target << " found in the file." << endl;
+    } 
+    else 
+    {
+        cout << "Number " << target << " not found in the file." << endl;
+    }
+
+  
+}
+numbers.txt******************************
+473 983 27 704 903 710 14 411 77 365
+617 551 25 693 744 732 475 543 734 215
+279 404 423 568 47 665 283 340 963 729
+609 235 562 512 56 257 373 267 302 248
+420 800 3 857 495 968 558 290 330 791
+368 365 921 447 981 862 646 661 873 588
+772 738 785 611 155 321 447 950 343 447
+296 314 827 678 840 264 444 553 668 450
+214 778 788 135 455 154 663 657 232 469
+******************************************************************************************
+//ex 2
+#include <iostream>
+#include <fstream>
+#include <vector>
+
+using namespace std;
+
+char convertToChar(int number) {
+    return static_cast<char>(number);
+}
+
+bool linearSearch(const vector<char>& chars, char target) 
+{
+    for (char ch : chars)
+    {
+        if (ch == target)
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
+int main() {
+    ifstream inputFile("message.txt");
+    if (!inputFile)
+    {
+        cout << "Error opening file." << endl;
+        return 0;
+    }
+
+    vector<char> chars;
+    int num;
+    while (inputFile >> num) 
+    {
+        char ch = convertToChar(num);
+        chars.push_back(ch);
+    }
+    inputFile.close();
+
+    char target = 'p';
+    if (linearSearch(chars, target)) 
+    {
+        cout << "The letter '" << target << "' is present in the file." << endl;
+    } 
+    else 
+    {
+        cout << "The letter '" << target << "' is not present in the file." << endl;
+    }
+
+ 
+}
+message.txt*********************************************************
+73 116 32 105 115 32 100 105 102 102 105 99 117 108 116 32 116 111 32 100 101 99 114 121 112 116
+32 116 104 105 115 32 109 101 115 115 97 103 101
+****************************************************
+// ex3 
+#include <iostream>
+#include <fstream>
+
+using namespace std;
+
+int main() {
+    ifstream inputFile("message.txt");
+    if (!inputFile) {
+        cout << "Error opening file." << endl;
+        return 0;
+    }
+
+    char maxChar = '\0';
+    int aValue;
+    while (inputFile >> aValue) {
+        char ch = static_cast<char>(aValue);
+        if (ch > maxChar) {
+            maxChar = ch;
+        }
+    }
+    inputFile.close();
+
+    cout << "The maximum character value in the file is: " << static_cast<int>(maxChar) << endl;
+
+  
+}
+
