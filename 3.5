@@ -1,62 +1,82 @@
 #include <iostream>
-#include <string>
 #include <vector>
-
-
 
 using namespace std;
 
+class Enemy {
+private:
+    int hp;
+    int attackDamage;
 
-class Enemy 
-{
-    private:
-    int hp = 20;
-    int attack = 2;
-    string name = "zozo"
+public:
+    Enemy(int health, int damage) : hp(health), attackDamage(damage) {}
 
-    public:
-     int getAttacked()
-     {
-        return attack;
-     }
-     int takeDamage( int hurt)
-     {
-        hp -= hurt;
-     }
-     int showHealth()
-     {
+    int getHP() const {
         return hp;
-     }
-     string getName()
-     {
-        return name;
-     }
+    }
 
+    int getAttackDamage() const {
+        return attackDamage;
+    }
+
+    void updateHP(int damage) {
+        hp -= damage;
+    }
 };
 
+class Player {
+private:
+    int hp;
+    int attackDamage;
 
-int main ()
-{
- vector <Enemy> omom;
+public:
+    Player(int health, int damage) : hp(health), attackDamage(damage) {}
 
- Enemy Gort;
+    int getHP() const {
+        return hp;
+    }
 
- for (int i = 0; i < 5; i++)
- {
-    cout << "adding a " << Gort.getName() << " to the list \n" << endl;
-    omom.push_back(Gort);
- }
+    int getAttackDamage() const {
+        return attackDamage;
+    }
 
- for (int i = 0; i > omom.size(); i++)
- {
-    cout << ". "
+    void updateHP(int damage) {
+        hp -= damage;
+    }
+};
 
- }
+int main() {
+    vector<Enemy> enemies;
 
+    // Create three enemies with low health
+    Enemy enemy1(20, 5);
+    Enemy enemy2(15, 3);
+    Enemy enemy3(18, 4);
 
+    enemies.push_back(enemy1);
+    enemies.push_back(enemy2);
+    enemies.push_back(enemy3);
 
+    Player player(30, 8);
 
+    // Battle each enemy one at a time
+    for (const auto& enemy : enemies) {
+        while (player.getHP() > 0 && enemy.getHP() > 0) {
+            enemy.updateHP(player.getAttackDamage());
+            player.updateHP(enemy.getAttackDamage());
+        }
 
+        // Check the outcome of the battle
+        if (player.getHP() <= 0)
+        {
+            cout << "Player has been defeated by the enemy!" << endl;
+            break;
+        } 
+        else if (enemy.getHP() <= 0) 
+        {
+            cout << "Player has defeated the enemy!" << endl;
+        }
+    }
 
-
+   
 }
