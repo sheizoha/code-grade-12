@@ -1,0 +1,56 @@
+#include <iostream>
+#include <fstream>
+#include <vector>
+
+using namespace std;
+
+void writeToFile(const string& fileName) {
+    ofstream outputFile(fileName);
+    if (!outputFile) {
+        cout << "Error opening file: " << fileName << endl;
+        return;
+    }
+
+    cout << "Enter 5 numbers: " << endl;
+    for (int i = 0; i < 5; ++i) {
+        int num;
+        cin >> num;
+        outputFile << num << " ";
+    }
+
+    outputFile.close();
+    cout << "File writing complete." << endl;
+}
+
+void readFromFile(const string& fileName) {
+    ifstream inputFile(fileName);
+    if (!inputFile) {
+        cout << "Error opening file: " << fileName << endl;
+        return;
+    }
+
+    vector<int> numbers;
+    int num;
+    while (inputFile >> num) {
+        numbers.push_back(num);
+    }
+
+    inputFile.close();
+
+    cout << "Numbers read from the file: ";
+    for (int num : numbers) {
+        cout << num << " ";
+    }
+    cout << endl;
+}
+
+int main() {
+    string fileName;
+    cout << "Enter the name of the file: ";
+    cin >> fileName;
+
+    writeToFile(fileName);
+    readFromFile(fileName);
+
+
+}
