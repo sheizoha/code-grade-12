@@ -1,0 +1,135 @@
+//Exersize one
+class Mammal {
+public:
+    virtual void makeSound()
+    {
+        // Default implementation of makeSound for Mammal
+    }
+};
+
+class Dog : public Mammal {
+public:
+    void makeSound() override {
+        cout << "Woof! Woof!" << endl;
+    }
+};
+
+class Cat : public Mammal {
+public:
+    void makeSound() override {
+        cout << "Meow! Meow!" << endl;
+    }
+};
+
+class Cow : public Mammal {
+public:
+    void makeSound() override {
+        cout << "Moo! Moo!" << endl;
+    }
+};
+//exercise 2**************************************************************************
+class Dog : public Mammal {
+private:
+    string breed;
+
+public:
+    void setBreed(const string& newBreed) {
+        breed = newBreed;
+    }
+
+    string getBreed() const {
+        return breed;
+    }
+
+    void makeSound() override {
+        cout << "The " << breed << " dog barks: Woof! Woof!" << endl;
+    }
+};
+
+class Cat : public Mammal {
+private:
+    string color;
+
+public:
+    void setColor(const string& newColor) {
+        color = newColor;
+    }
+
+    string getColor() const {
+        return color;
+    }
+
+    void makeSound() override {
+        cout << "The " << color << " cat meows: Meow! Meow!" << endl;
+    }
+};
+//Exercise 3*********************************************************************************
+mammal.hpp
+
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+class Mammal {
+public:
+    virtual void makeSound() {
+        // Default implementation of makeSound for Mammal
+    }
+};
+
+class Dog : public Mammal {
+private:
+    string breed;
+
+public:
+    void setBreed(const string& newBreed) {
+        breed = newBreed;
+    }
+
+    string getBreed() const {
+        return breed;
+    }
+
+    void makeSound() override {
+        cout << "The " << breed << " dog barks: Woof! Woof!" << endl;
+    }
+};
+
+class Cat : public Mammal {
+private:
+    string color;
+
+public:
+    void setColor(const string& newColor) {
+        color = newColor;
+    }
+
+    string getColor() const {
+        return color;
+    }
+
+    void makeSound() override {
+        cout << "The " << color << " cat meows: Meow! Meow!" << endl;
+    }
+};
+
+***************************************
+main cpp
+#include <iostream>
+#include "Mammal.hpp"
+
+int main() {
+    Dog dog;
+    dog.setBreed("Labrador");
+    dog.makeSound();
+
+    Cat cat;
+    cat.setColor("Calico");
+    cat.makeSound();
+
+    return 0;
+}
+
+
+
