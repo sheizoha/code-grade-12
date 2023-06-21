@@ -1,0 +1,136 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+void bubbleSort(vector<string>& names) {
+    int n = names.size();
+    bool swapped;
+
+    for (int i = 0; i < n - 1; i++) 
+    {
+        swapped = false;
+        for (int j = 0; j < n - i - 1; j++) 
+        {
+            if (names[j] > names[j + 1]) 
+            {
+                swap(names[j], names[j + 1]);
+                swapped = true;
+            }
+        }
+        if (!swapped) 
+        {
+            // If no swapping occurred in the inner loop, the list is already sorted
+            break;
+        }
+    }
+}
+
+int main() {
+    vector<string> names = { "John", "Alice", "David", "Emily", "Bob" };
+
+    // Sort the names alphabetically
+    bubbleSort(names);
+
+    cout << "Sorted names in alphabetical order:" << endl;
+    for (const auto& name : names) {
+        cout << name << endl;
+    }
+
+    // Reverse sort the names
+    reverse(names.begin(), names.end());
+
+    cout << "\nSorted names in reverse order:" << endl;
+    for (const auto& name : names)
+    {
+        cout << name << endl;
+    }
+
+}
+************************************************************************************************************
+********************************************************************************************************
+//ex 2
+#include <iostream>
+#include <fstream>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+int main() {
+    ifstream inputFile("unsortedNumbers.txt");
+    if (!inputFile) {
+        cout << "Failed to open the input file." << endl;
+        return 1;
+    }
+
+    vector<int> numbers;
+    int number;
+    while (inputFile >> number) {
+        numbers.push_back(number);
+    }
+
+    inputFile.close();
+
+    // Bubble sort algorithm
+    int size = numbers.size();
+    for (int i = 0; i < size - 1; i++) {
+        for (int j = 0; j < size - i - 1; j++) {
+            if (numbers[j] > numbers[j + 1]) {
+                // Swap the elements
+                int temp = numbers[j];
+                numbers[j] = numbers[j + 1];
+                numbers[j + 1] = temp;
+            }
+        }
+    }
+
+    // Output the sorted list
+    for (int i = 0; i < size; i++) {
+        cout << numbers[i] << endl;
+    }
+}
+*************************************************************************************************************************************
+// ex 2
+#include <iostream>
+#include <fstream>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+int main() {
+    ifstream inputFile("unsortedNumbers.txt");
+    if (!inputFile) {
+        cout << "Failed to open the input file." << endl;
+        return 1;
+    }
+
+    vector<int> numbers;
+    int number;
+    while (inputFile >> number) {
+        numbers.push_back(number);
+    }
+
+    inputFile.close();
+
+    // Bubble sort algorithm
+    int size = numbers.size();
+    for (int i = 0; i < size - 1; i++) {
+        for (int j = 0; j < size - i - 1; j++) {
+            if (numbers[j] > numbers[j + 1]) {
+                // Swap the elements
+                int temp = numbers[j];
+                numbers[j] = numbers[j + 1];
+                numbers[j + 1] = temp;
+            }
+        }
+    }
+
+    // Output the sorted list
+    for (int i = 0; i < size; i++) {
+        cout << numbers[i] << endl;
+    }
+}
+
