@@ -1,0 +1,28 @@
+void UpdateEnemy()
+{
+    //if not moving, get a new value
+    int randomDirection = GetRandomValue(0, 3);
+    //update end location
+    switch (randomDirection)
+    {
+        case 0: // Move Up
+            if (enemy.y > tileSize)
+                enemy.y -= tileSize;
+            break;
+        case 1: // Move Down
+            if (enemy.y < screenHeight - tileSize)
+                enemy.y += tileSize;
+            break;
+        case 2: // Move Left
+            if (enemy.x > tileSize)
+                enemy.x -= tileSize;
+            break;
+        case 3: // Move Right
+            if (enemy.x < screenWidth - tileSize)
+                enemy.x += tileSize;
+            break;
+    }
+
+    //move enemy towards location using enemy.x += enemy.speed
+    
+};
