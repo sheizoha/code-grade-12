@@ -1,0 +1,270 @@
+#include <raylib.h>
+#include <vector>
+
+using namespace std;
+
+//------------------------------------------------------------------------------------
+// Program main entry point
+//------------------------------------------------------------------------------------
+
+const int screenWidth = 600;
+const int screenHeight = 600;
+const int tileSize = 50;
+const int mapWidth = screenWidth / tileSize;
+const int mapHeight = screenHeight / tileSize;
+
+struct Player{
+    float x;
+    float y;
+    float endx; //where the player will be going horizontally
+    float endy; // where the player will be going vertically
+    int radius;
+    int speed;
+    bool moving; //Tracks if the player is currently moving
+} player{425, 225, 425, 225, 20, 5, false};
+
+struct Pellet {
+    float x;
+    float y;
+    bool collected;
+};
+
+struct Enemy {
+    float x;
+    float y;
+    float endx; //where the player will be going horizontally
+    float endy; // where the player will be going vertically
+    int speed;
+    bool moving;
+};
+
+vector<Pellet> pellets; // std:: removed add back if code messes up
+Enemy enemy{50, 50,50,50, 5, 0};
+
+
+// some things placed here so code keeps running smoothly
+int score = 0;
+void ResetGame();
+
+void GeneratePellets()
+{
+    for (int y = 0; y < mapHeight; y++)
+    {
+        for (int x = 0; x < mapWidth; x++)
+        {
+            if (x % 2 == 0 && y % 2 == 0)
+            {
+                Pellet pellet;
+                pellet.x = x * tileSize + tileSize / 2;
+                pellet.y = y * tileSize + tileSize / 2;
+                pellet.collected = false;
+                pellets.push_back(pellet);
+            }
+        }
+    }
+}
+
+void DrawMaze()
+{
+    for (int y = 0; y < mapHeight; y++)
+    {
+        for (int x = 0; x < mapWidth; x++)
+        {
+            if ((x == 0 || x == mapWidth - 1) || (y == 0 || y == mapHeight - 1))
+                DrawRectangle(x * tileSize, y * tileSize, tileSize, tileSize, DARKGRAY);
+            else
+                DrawRectangle(x * tileSize, y * tileSize, tileSize, tileSize, RAYWHITE);
+        }
+    }
+}
+
+void DrawPellets()
+{
+    for (const auto& pellet : pellets)
+    {
+        if (!pellet.collected)
+            DrawCircle(pellet.x, pellet.y, 5, YELLOW);
+    }
+}
+
+void UpdatePlayer()
+{
+    if (!player.moving)
+    {
+        if (IsKeyDown(KEY_D) && player.x < screenWidth - tileSize)
+        {
+            player.moving = true;
+            player.endx += tileSize;
+        }
+        else if (IsKeyDown(KEY_S) && player.y < screenHeight - tileSize)
+        {
+            player.moving = true;
+            player.endy += tileSize;
+        }
+        else if (IsKeyDown(KEY_A) && player.x > 0)
+        {
+            player.moving = true;
+            player.endx -= tileSize;
+        }
+        else if (IsKeyDown(KEY_W) && player.y > 0)
+        {
+            player.moving = true;
+            player.endy -= tileSize;
+        }
+    }
+
+    if (player.moving)
+    {
+        if (player.x < player.endx)
+            player.x += player.speed;
+        else if (player.x > player.endx)
+            player.x -= player.speed;
+
+        if (player.y < player.endy)
+            player.y += player.speed;
+        else if (player.y > player.endy)
+            player.y -= player.speed;
+
+        if (player.x == player.endx && player.y == player.endy)
+        {
+            player.moving = false;
+            player.endx = player.x;
+            player.endy = player.y;
+        }
+    }
+}
+
+void UpdateEnemy()
+{
+
+     if (!enemy.moving)
+    {
+        if (IsKeyDown(KEY_RIGHT) && enemy.x < screenWidth - tileSize)
+        {
+            enemy.moving = true;
+            enemy.endx += tileSize;
+        }
+        else if (IsKeyDown(KEY_DOWN) && enemy.y < screenHeight - tileSize)
+        {
+            enemy.moving = true;
+            enemy.endy += tileSize;
+        }
+        else if (IsKeyDown(KEY_LEFT) && enemy.x > 0)
+        {
+            enemy.moving = true;
+            enemy.endx -= tileSize;
+        }
+        else if (IsKeyDown(KEY_UP) && enemy.y > 0)
+        {
+            enemy.moving = true;
+            enemy.endy -= tileSize;
+        }
+    }
+
+    if (enemy.moving)
+    {
+        if (enemy.x < enemy.endx)
+            enemy.x += enemy.speed;
+        else if (enemy.x > enemy.endx)
+            enemy.x -= enemy.speed;
+
+        if (enemy.y < enemy.endy)
+            enemy.y += enemy.speed;
+        else if (enemy.y > enemy.endy)
+            enemy.y -= enemy.speed;
+
+        if (enemy.x == enemy.endx && enemy.y == enemy.endy)
+        {
+            enemy.moving = false;
+            enemy.endx = enemy.x;
+            enemy.endy = enemy.y;
+        }
+    }
+    
+}
+void CheckCollision() // checks to  see if they have collided and then game resets
+{
+    for (auto& pellet : pellets)
+    {
+        if (!pellet.collected && CheckCollisionPointCircle({ player.x, player.y }, { pellet.x, pellet.y }, 10))
+        {
+            pellet.collected = true;
+            score++;
+        }
+    }
+
+    if (CheckCollisionCircles({ player.x, player.y }, player.radius, { enemy.x, enemy.y }, tileSize / 2) || score == pellets.size())
+    {
+        ResetGame();
+    }
+}
+void DrawScore()
+{
+    // char scoreText[16];
+    // sprintf(scoreText, "Score: %d", score);
+    // DrawText(scoreText, 10, 10, 20, BLACK);
+    DrawText(TextFormat("Score: %i", score), 10, 10, 20, BLACK);
+}
+void ResetGame()
+{
+    // makes sure that enemy and player are in their original positions
+    player.x = 425;
+    player.y = 225;
+    player.endx = 425;
+    player.endy = 225;
+    player.moving = false;
+
+    enemy.x = 50;
+    enemy.y = 50;
+    enemy.endx = 50;
+    enemy.endy = 50;
+    enemy.moving = 50;
+
+    
+    score = 0;
+    
+    // resets the pellets
+    for (auto& pellet : pellets)
+    {
+        pellet.collected = false;
+    }
+    
+  
+}
+
+
+
+
+int main()
+{ 
+
+    InitWindow(screenWidth, screenHeight, "Pacman");
+
+    GeneratePellets();
+
+    SetTargetFPS(60);
+
+    // making the mave and running in it
+    while (!WindowShouldClose())
+    {
+        UpdatePlayer();
+        UpdateEnemy();
+        CheckCollision();
+
+        BeginDrawing();
+        {
+            ClearBackground(RAYWHITE);
+
+            DrawMaze();
+            DrawPellets();
+            DrawCircle(player.x, player.y, player.radius, BLUE);
+            DrawCircle(enemy.x, enemy.y, tileSize / 2, RED);
+            DrawScore();
+        }
+        EndDrawing();
+    }
+
+    CloseWindow();
+
+    return 0;
+}
